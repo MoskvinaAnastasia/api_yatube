@@ -53,6 +53,11 @@ class CommentViewSet(viewsets.ModelViewSet):
             raise PermissionDenied('Изменение чужого комментария запрещено!')
         super().perform_update(serializer)
 
+    def perform_destroy(self, instance):
+        if instance.author != self.request.user:
+            raise PermissionDenied('Удаление чужого комментария запрещено!')
+        super().perform_destroy(instance)
+
     def get_queryset(self):
         post_id = self.kwargs.get('post_id')
         post = get_object_or_404(Post, id=post_id)
