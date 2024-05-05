@@ -10,17 +10,18 @@ from api.serializers import GroupSerializer, PostSerializer, CommentSerializer
 
 
 class GroupViewSet(viewsets.ModelViewSet):
-    """ViewSet для управления группами.
-    Cоздание, получение, обновление и удаление групп."""
+    """
+    ViewSet для управления группами.
+    Создание, получение, обновление и удаление групп.
+    """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
 
     def create(self, request):
         """
         Создает новую группу.
-        Если данные действительны, создает новую группу и возвращает данные
-        группы с кодом статуса 201. Если нет, возвращает код статуса
-        405.
+        Если данные действительны, создает новую группу и возвращает данные.
+        группы с кодом статуса 201. Если нет, возвращает код статуса 405.
         """
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
