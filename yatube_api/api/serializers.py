@@ -14,11 +14,10 @@ class PostSerializer(serializers.ModelSerializer):
     """Сериализатор для модели Post."""
     author = serializers.StringRelatedField(
         read_only=True, default=serializers.CurrentUserDefault())
-    group = serializers.PrimaryKeyRelatedField(queryset=Group.objects.all())
 
     class Meta:
         model = Post
-        fields = ('text', 'pub_date', 'author', 'image', 'group','id')
+        fields = ('text', 'pub_date', 'author', 'image', 'group', 'id')
 
 
 class CommentSerializer(serializers.ModelSerializer):
